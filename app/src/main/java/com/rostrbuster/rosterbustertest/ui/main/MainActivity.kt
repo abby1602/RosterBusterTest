@@ -66,12 +66,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        mainViewModel.showToast.observe(this, Observer { showToast ->
-            if (showToast) {
-
-                Toast.makeText(this,mainViewModel.showToastValue, Toast.LENGTH_LONG).show()
-            }
-        })
 
 
         mainViewModel.flightItemClick.observe(this, Observer{

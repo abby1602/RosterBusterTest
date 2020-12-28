@@ -24,8 +24,6 @@ class MainViewModel : ViewModel(){
     var apiClient = ApiClient.getClient().create(ApiInterface::class.java)
 
     var isLoading = MutableLiveData<Boolean>()
-    var showToast = MutableLiveData(false)
-    var showToastValue = ""
 
     var flightstatusList = ArrayList<FlightStatusResponseItem>()
     var flightStatusAdapter = FlightStatusAdapter(this)
@@ -59,8 +57,6 @@ class MainViewModel : ViewModel(){
                     swipeRefreshLayoutVisibility.value = false
                     isLoading.value = false
                     Log.e("fail", t.message)
-                    showToast.value = true
-                    showToastValue = t.message?:""
                 }
 
                 override fun onResponse(call: Call<FlightStatusResponse>, response: Response<FlightStatusResponse>) {
@@ -68,26 +64,32 @@ class MainViewModel : ViewModel(){
                     swipeRefreshLayoutVisibility.value = false
                     isLoading.value = false
 
-                    flightstatusList.clear()
 
-                    response.body()?.let { flightstatusList.addAll(it) }
+                    if(response.isSuccessful){
 
-                    flightStatusAdapter.notifyDataSetChanged()
+                        flightstatusList.clear()
 
-                    val tempList= ArrayList<FlightStatusEntity>()
+                        response.body()?.let { flightstatusList.addAll(it) }
+
+                        flightStatusAdapter.notifyDataSetChanged()
+
+                        val tempList= ArrayList<FlightStatusEntity>()
 
 
-                    response.body()?.forEach {
-                        val strobj = App.instance.gson.toJson(it).toString()
+                        response.body()?.forEach {
+                            val strobj = App.instance.gson.toJson(it).toString()
 
 
-                        tempList.add(App.instance.gson.fromJson(strobj, FlightStatusEntity::class.java))
+                            tempList.add(App.instance.gson.fromJson(strobj, FlightStatusEntity::class.java))
+                        }
+
+                        GlobalScope.launch(Dispatchers.IO) {
+                            LocalDatabase.getDatabase().flightStatusDAO().deleteAllFlightStatusList()
+                            LocalDatabase.getDatabase().flightStatusDAO().insertAllFlightStatus(tempList)
+                        }
                     }
 
-                    GlobalScope.launch(Dispatchers.IO) {
-                        LocalDatabase.getDatabase().flightStatusDAO().deleteAllFlightStatusList()
-                        LocalDatabase.getDatabase().flightStatusDAO().insertAllFlightStatus(tempList)
-                    }
+
 
                 }
             })
@@ -112,11 +114,13 @@ class MainViewModel : ViewModel(){
         }
 
 
-
     }
 
-    fun flightDetail(model : FlightStatusResponseItem){
+    /**
+     * go to detail screen
+     * */
 
+    fun flightDetail(model : FlightStatusResponseItem){
         flightStatusResponseItem = model
         flightItemClick.value = true
     }

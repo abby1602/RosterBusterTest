@@ -17,7 +17,6 @@ data class FlightStatusEntity(
     @ColumnInfo(name = "DutyCode") val DutyCode: String,
     @ColumnInfo(name = "DutyID") val DutyID: String,
     @ColumnInfo(name = "FirstOfficer") @SerializedName("First Officer") val FirstOfficer: String,
-
     @ColumnInfo(name = "FlightAttendant") @SerializedName("Flight Attendant") val FlightAttendant: String,
     @ColumnInfo(name = "Flightnr") val Flightnr: String,
     @ColumnInfo(name = "Tail") val Tail: String,
