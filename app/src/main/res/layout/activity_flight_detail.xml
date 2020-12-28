@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rostrbuster.rosterbustertest.ui.flightDetail.FlightDetailViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dip"
+        tools:context=".ui.flightDetail.FlightDetailActivity">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtFlightDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/flight_details"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="23dip"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtFlightInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/txtFlightDetail"
+            android:text="@string/flight_info"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="20dip"
+            android:textSize="20dip"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtDeparture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/txtFlightInfo"
+            android:text="@{`Departure - `+viewModel.model.departure}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="10dip"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtDeparture"
+            android:text="@{`Destination - `+viewModel.model.destination}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="5dip"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtTimeDepart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtDestination"
+            android:text="@{`Time of Departure - `+ viewModel.model.time_Depart}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="5dip"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtTimeArrive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtTimeDepart"
+            android:text="@{`Time of Arival - ` + viewModel.model.time_Arrive}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="5dip"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtAircraftType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtTimeArrive"
+            android:text="@{`Aircraft Type - ` + viewModel.model.aircraftType}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="5dip"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtAircraftType"
+            android:text="@{`Status - ` + viewModel.model.dutyCode}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="5dip"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtCrewInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtStatus"
+            android:text="@string/crew_info"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20dip"
+            android:layout_marginTop="20dip"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtCaptain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtCrewInfo"
+            android:text="@{`Captain - `+ viewModel.model.captain}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="10dip"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtFirstOfficer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtCaptain"
+            android:text="@{`First Officer - `+ viewModel.model.firstOfficer}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="5dip"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtFlightAttendant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtFirstOfficer"
+            android:text="@{`Flight Attendant - ` + viewModel.model.flightAttendant}"
+            android:textColor="@color/black"
+            android:textSize="20dip"
+            android:layout_marginTop="5dip"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
